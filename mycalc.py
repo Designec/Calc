@@ -12,7 +12,7 @@ def clear():
 
 def eq(eqkey):
     if eqkey == '=':
-        allsimbols = '-+01234567890.*/'
+        allsimbols = '-+01234567890.*/='
         if entry.get()[0] not in allsimbols:
             messagebox.showerror('Ошибка!', 'Вы ввели не число!')
         try:
@@ -43,16 +43,13 @@ def calc(key):
 
 entry = Entry(font='Arial 20', justify=RIGHT)
 entry.grid(row=0, columnspan=4, sticky=W + E)
-btnC = ttk.Button(window, text='C', command=clear)
-btnC.grid(column=0, columnspan=4, row=1, ipadx='10', ipady='10', sticky=W + E)
-btnEq = ttk.Button(window, text='=', command=lambda: eq('='))
-btnEq.grid(column=0, columnspan=4, row=6, ipadx='10', ipady='10', sticky=W + E)
 
 btnList = [
     '1', '2', '3', '/',
     '4', '5', '6', '*',
     '7', '8', '9', '-',
-    '.', '0', '+/-', '+'
+    '.', '0', '+/-', '+',
+    '=', 'C'
 ]
 
 r = 2
@@ -60,7 +57,14 @@ c = 0
 
 
 for i in btnList:
-    ttk.Button(window, text=i, command=lambda x=i: calc(x)).grid(row=r, column=c, ipadx='10', ipady='10')
+    if i == '=':
+        ttk.Button(window, text=i, command=lambda x=i: eq(x)).grid(column=0, columnspan=4, row=8, ipadx='10',
+                                                                   ipady='10', sticky=W + E)
+    elif i == 'C':
+        ttk.Button(window, text=i, command=clear).grid(column=0, columnspan=4, row=1, ipadx='10',
+                                                       ipady='10', sticky=W + E)
+    else:
+        ttk.Button(window, text=i, command=lambda x=i: calc(x)).grid(row=r, column=c, ipadx='10', ipady='10')
     c += 1
     if c > 3:
         c = 0
