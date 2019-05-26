@@ -18,15 +18,12 @@ def calc(key):
         except IndexError:
             pass
     elif key == '=':
-        allsimbols = '-+01234567890.*/'
-        if entry.get()[0] not in allsimbols:
-            messagebox.showerror('Ошибка!', 'Вы ввели не число!')
         try:
             result = eval(entry.get())
             entry.delete(0, END)
             entry.insert(END, result)
         except :
-            messagebox.showerror("Ошибка!", 'Проверь правильность данных')
+            messagebox.showerror("Error!", 'Проверьте правильность данных')
     elif key == 'C':
         entry.delete(0, END)
     else:
