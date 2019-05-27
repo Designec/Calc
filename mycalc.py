@@ -22,8 +22,10 @@ def calc(key):
             result = eval(entry.get())
             entry.delete(0, END)
             entry.insert(END, result)
-        except :
+        except (SyntaxError, NameError):
             messagebox.showerror("Error!", 'Проверьте правильность данных')
+        except ZeroDivisionError:
+            messagebox.showerror("Error!", 'На ноль делить нельзя!')
     elif key == 'C':
         entry.delete(0, END)
     else:
@@ -48,11 +50,11 @@ c = 0
 
 for i in btnList:
     if i == '=':
-        ttk.Button(window, text=i, command=lambda x=i: calc(x)).grid(column=0, columnspan=4, row=8, ipadx='10',
-                                                                     ipady='10', sticky=W + E)
+        ttk.Button(window, text=i, command=lambda x=i: calc(x)).grid(column=0, columnspan=4, row=8,
+                                                                     ipadx='10', ipady='10', sticky=W + E)
     elif i == 'C':
-        ttk.Button(window, text=i, command=lambda x=i: calc(x)).grid(column=0, columnspan=4, row=1, ipadx='10',
-                                                                     ipady='10', sticky=W + E)
+        ttk.Button(window, text=i, command=lambda x=i: calc(x)).grid(column=0, columnspan=4, row=1,
+                                                                     ipadx='10', ipady='10', sticky=W + E)
     else:
         ttk.Button(window, text=i, command=lambda x=i: calc(x)).grid(row=r, column=c, ipadx='10', ipady='10')
     c += 1
